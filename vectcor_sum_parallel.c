@@ -140,11 +140,15 @@ int vector_sum_p(int *array, int rank, int num_proc)
         else //(rank == root)
         {
           
-            sums_array = MPI_Recv(sums from ranks);
-          
-        }
-        final_sum = vector_sum_s(sums_array);
+            int final_sum = sum;
+            int temp;
 
-            
+            for (int i = 1; i < num_proc; i++) 
+            {
+                temp = MPI_Recv(i);
+                final_sum += temp;
+            }
+        }
+
         return final_sum;
 }
