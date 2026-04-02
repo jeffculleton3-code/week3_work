@@ -137,7 +137,7 @@ int vector_sum_p(int *array, int size, int rank, int num_proc)
         // sum is the partial sum from start to end
         // need to send this to the root
 
-        int final_sum = 0;
+        final_sum = 0;
         
         if (rank != root) 
         {
@@ -149,11 +149,10 @@ int vector_sum_p(int *array, int size, int rank, int num_proc)
         {
           
             int final_sum = sum;
-            int temp;
 
             for (int i = 1; i < num_proc; i++) 
             {
-                temp = MPI_Recv(&temp, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                MPI_Recv(&temp, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 final_sum += temp;
             }
          }
