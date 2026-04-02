@@ -9,6 +9,7 @@ int check_args(int argc, char **argv);
 void initialise_vector(int vector[], int size, int initial);
 void print_vector(int vector[], int size);
 int sum_vector(int vector[], int size);
+int vector_sum_p(int *array, int rank, int num_proc);
 
 int main(int argc, char **argv)
 {
@@ -123,14 +124,17 @@ int vector_sum_p(int *array, int rank, int num_proc)
         int stop = (rank + 1)* chunk;
   
         // now, do the sum just as before
-        for (int i = int start, i < end, i++) 
+        for (int i = start; i < stop; i++) 
         {
           
-                 int sum += array[i];
+                 sum += array[i];
           
         }
         // sum is the partial sum from start to end
         // need to send this to the root
+
+        int final_sum = 0;
+        
         if (rank != root) 
         {
           
@@ -148,7 +152,7 @@ int vector_sum_p(int *array, int rank, int num_proc)
                 temp = MPI_Recv(i);
                 final_sum += temp;
             }
-        }
+         }
 
         return final_sum;
 }
