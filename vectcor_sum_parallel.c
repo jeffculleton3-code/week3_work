@@ -137,7 +137,7 @@ int vector_sum_p(int *array, int size, int rank, int num_proc)
         // sum is the partial sum from start to end
         // need to send this to the root
 
-        final_sum = 0;
+        int final_sum = 0;
         int temp;
         
         if (rank != root) 
@@ -149,7 +149,7 @@ int vector_sum_p(int *array, int size, int rank, int num_proc)
         else //(rank == root)
         {
           
-            int final_sum = sum;
+            final_sum = sum;
 
             for (int i = 1; i < num_proc; i++) 
             {
