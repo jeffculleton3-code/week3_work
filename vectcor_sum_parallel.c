@@ -9,7 +9,7 @@ int check_args(int argc, char **argv);
 void initialise_vector(int vector[], int size, int initial);
 void print_vector(int vector[], int size);
 int sum_vector(int vector[], int size);
-int vector_sum_p(int *array, int rank, int num_proc);
+int vector_sum_p(int *array, int size, int rank, int num_proc);
 
 int main(int argc, char **argv)
 {
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
         }
 
         // sums the vector
-        int my_sum = vector_sum_p(my_vector, rank, num_proc);
+        int my_sum = vector_sum_p(my_vector, num_arg, rank, num_proc);
 
         // prints the sum
         if (rank ==0)
@@ -114,7 +114,7 @@ int check_args(int argc, char **argv)
         return num_arg;
 }
 
-int vector_sum_p(int *array, int rank, int num_proc)
+int vector_sum_p(int *array, int size, int rank, int num_proc)
 {  
         int sum = 0;
         int root = 0;
