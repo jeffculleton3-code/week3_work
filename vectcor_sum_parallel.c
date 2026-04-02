@@ -138,6 +138,7 @@ int vector_sum_p(int *array, int size, int rank, int num_proc)
         // need to send this to the root
 
         final_sum = 0;
+        int temp;
         
         if (rank != root) 
         {
