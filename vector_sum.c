@@ -22,6 +22,10 @@ int main(int argc, char **argv)
 
 
         // TODO: put some code here that makes a more meaningful vector
+        for (int i = 0; i < num_arg; i++) 
+        {
+                my_vector[i] = i;
+        }
 
         // sums the vector
         int my_sum = sum_vector(my_vector, num_arg);
