@@ -120,7 +120,7 @@ int vector_sum_p(int *array, int size, int rank, int num_proc)
         int root = 0;
   
         // First, determine the size of each job
-        int chunk = sizeof(array)/num_proc;
+        int chunk = size/num_proc;
   
         // Next, work out what work to do
         int start = rank * chunk;
