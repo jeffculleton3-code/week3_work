@@ -36,10 +36,13 @@ int main(int argc, char **argv)
         }
 
         // sums the vector
-        int my_sum = vector_sum_p(my_vector, num_arg, rank, num_proc);
+        int my_sum = vector_sum_p(my_vector, rank, num_proc);
 
         // prints the sum
-        printf("Sum: %d\n", my_sum);
+        if (rank ==0)
+        {
+                printf("Sum: %d\n", my_sum);
+        }
 
         // if we use malloc, must free when done!
         free(my_vector);
@@ -114,6 +117,7 @@ int check_args(int argc, char **argv)
 int vector_sum_p(int *array, int rank, int num_proc)
 {  
         int sum = 0;
+        int root = 0;
   
         // First, determine the size of each job
         int chunk = sizeof(array)/num_proc;
@@ -138,7 +142,7 @@ int vector_sum_p(int *array, int rank, int num_proc)
         if (rank != root) 
         {
           
-                 MPI_Send(sum, 0);
+                 MPI_Send(&sum, 1, MPI_INT, root, 0, MPI_COMM_WORLD);
           
         }
         else //(rank == root)
@@ -149,7 +153,7 @@ int vector_sum_p(int *array, int rank, int num_proc)
 
             for (int i = 1; i < num_proc; i++) 
             {
-                temp = MPI_Recv(i);
+                temp = MPI_Recv(&temp, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 final_sum += temp;
             }
          }
