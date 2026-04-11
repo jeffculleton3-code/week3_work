@@ -1,6 +1,6 @@
 week3_work
 
-Hello_mpi takes a larger amount of real time to run than hello_mpi_serial, however, once hello_mpi runs with around 8 processes, the sum of the user and system time starts to exceed the real time which indicates parallel processing is occurring. 
+hello_mpi takes a larger amount of real time to run than hello_mpi_serial, however, once hello_mpi runs with around 8 processes, the sum of the user and system time starts to exceed the real time which indicates parallel processing is occurring. 
 
 Describe proof.c:
 main(): The function does some initialisation operations for error handilng, numerical argument, MPI, rank and size, and uses functions to check the arguments. The communicator universe size and what task to carry out. It then finalises the MPI environment.
